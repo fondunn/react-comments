@@ -7,7 +7,9 @@ import { useScrollRestoration } from '@/hooks/useScrollRestoration'
 import { Container } from '@mui/material'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import CommentItem from '../Comment'
+import CommentItem from '../CommentItem'
+import Failed from './failed'
+import Loading from './loading'
 
 const CommentsList: React.FC = () => {
 	const dispatch: AppDispatch = useDispatch()
@@ -24,11 +26,11 @@ const CommentsList: React.FC = () => {
 	}, [status])
 
 	if (status === 'loading') {
-		return <div>Loading...</div>
+		return <Loading />
 	}
 
-	if (status === 'failed') {
-		return <div>Error: {error}</div>
+	if (status === 'failed' || error) {
+		return <Failed />
 	}
 
 	return (

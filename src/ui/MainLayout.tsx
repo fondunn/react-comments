@@ -8,7 +8,13 @@ const MainLayout = ({ children }: Props) => {
 		<main>
 			<Container
 				maxWidth='md'
-				sx={{ position: 'relative', minHeight: '100svh', py: '1rem' }}
+				sx={{
+					position: 'relative',
+					minHeight: '100svh',
+					py: '1rem',
+					display: 'flex',
+					flexDirection: 'column',
+				}}
 			>
 				{children}
 			</Container>
