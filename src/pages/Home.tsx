@@ -1,13 +1,17 @@
+import ButtonAddComment from '@/components/ButtonAddComment'
 import CommentsList from '@/components/CommentsList'
-
+import styles from '@/styles/home.module.scss'
+import MainLayout from '@/ui/MainLayout'
 const HomePage = () => {
 	return (
-		<div>
-			<h1>React Comments</h1>
+		<MainLayout>
+			<h1 className={styles.title}>React Comments</h1>
+
 			<div>
 				<CommentsList />
 			</div>
-		</div>
+			<ButtonAddComment />
+		</MainLayout>
 	)
 }
 
