@@ -3,7 +3,7 @@ import {
 	fetchComments,
 	selectComments,
 } from '@/features/comments/commentsSlice'
-import { List, ListItem } from '@mui/material'
+import { Container } from '@mui/material'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import CommentItem from '../Comment'
@@ -25,13 +25,17 @@ const CommentsList: React.FC = () => {
 	}
 
 	return (
-		<List>
+		<Container
+			sx={{
+				display: 'flex',
+				flexDirection: 'column',
+				gap: '1rem',
+			}}
+		>
 			{comments.map(comment => (
-				<ListItem key={comment.id}>
-					<CommentItem comment={comment} />
-				</ListItem>
+				<CommentItem comment={comment} key={comment.id} />
 			))}
-		</List>
+		</Container>
 	)
 }
 
