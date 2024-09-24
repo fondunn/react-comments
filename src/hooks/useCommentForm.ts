@@ -11,6 +11,7 @@ export const useCommentForm = (onSubmit: (data: FormData) => void) => {
 		register,
 		handleSubmit,
 		reset,
+		setValue,
 		formState: { errors },
 	} = useForm<FormData>()
 
@@ -23,5 +24,6 @@ export const useCommentForm = (onSubmit: (data: FormData) => void) => {
 		register,
 		handleSubmit: handleSubmit(handleFormSubmit),
 		errors,
+		setValue,
 	}
 }

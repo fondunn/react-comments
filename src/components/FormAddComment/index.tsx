@@ -1,5 +1,8 @@
+import { LOCAL_USER } from '@/constants/localStorage'
 import { useCommentForm } from '@/hooks/useCommentForm'
+import { getItem } from '@/utils/localStorage'
 import { Button, DialogActions, TextField } from '@mui/material'
+import { useEffect } from 'react'
 import { SubmitHandler } from 'react-hook-form'
 
 interface FormAddCommentProps {
@@ -12,7 +15,16 @@ interface FormAddCommentProps {
 }
 
 const FormAddComment = ({ onSubmit, onClose }: FormAddCommentProps) => {
-	const { register, handleSubmit, errors } = useCommentForm(onSubmit)
+	const { register, handleSubmit, errors, setValue } = useCommentForm(onSubmit)
+	useEffect(() => {
+		const savedUser = JSON.parse(getItem(LOCAL_USER) || '{}')
+		if (savedUser.username) {
+			setValue('username', savedUser.username)
+		}
+		if (savedUser.fullName) {
+			setValue('fullName', savedUser.fullName)
+		}
+	}, [setValue])
 	return (
 		<form onSubmit={handleSubmit}>
 			<TextField
