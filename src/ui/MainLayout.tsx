@@ -1,9 +1,7 @@
 import { Container } from '@mui/material'
 import { PropsWithChildren } from 'react'
 
-interface Props extends PropsWithChildren {}
-
-const MainLayout = ({ children }: Props) => {
+const MainLayout = ({ children }: PropsWithChildren) => {
 	return (
 		<main>
 			<Container
