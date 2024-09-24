@@ -45,29 +45,6 @@ const addComment = async (newComment: Comment): Promise<Comment | null> => {
 	}
 }
 
-// const deleteComment = async (id: number): Promise<void> => {
-// 	try {
-// 		await deleteCommentFromServer(id)
-// 		const deletedComments = await getDeletedComments()
-// 		if (id > API_LIMIT) {
-// 			const filteredComments = deletedComments.filter(comment => comment !== id)
-// 			const comments = JSON.parse(getItem(LOCAL_COMMENTS) || '[]')
-// 			if (comments) {
-// 				const updatedComments = comments.filter(
-// 					(comment: Comment) => comment.id !== id
-// 				)
-// 				setItem(LOCAL_COMMENTS, JSON.stringify(updatedComments))
-// 			}
-// 			setItem(LOCAL_DELETED_COMMENTS, JSON.stringify([...filteredComments]))
-// 			return
-// 		} else {
-// 			setItem(LOCAL_DELETED_COMMENTS, JSON.stringify([...deletedComments, id]))
-// 		}
-// 	} catch (error) {
-// 		console.error('Error deleting comment:', error)
-// 	}
-// }
-
 const deleteComment = async (id: number): Promise<void> => {
 	try {
 		await deleteCommentFromServer(id)

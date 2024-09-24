@@ -36,11 +36,16 @@ export const fetchComments = createAsyncThunk<Comment[], void>(
 	}
 )
 
-export const addComment = createAsyncThunk<Comment, Comment>(
+export const addComment = createAsyncThunk<Comment | null, Comment>(
 	'comments/addComment',
 	async newComment => {
-		const response = await commentsAPI.addComment(newComment)
-		return response
+		try {
+			const response = await commentsAPI.addComment(newComment)
+			return response
+		} catch (error) {
+			console.error('Failed to add comment:', error)
+			throw error
+		}
 	}
 )
 
@@ -74,8 +79,12 @@ const commentsSlice = createSlice({
 			})
 			.addCase(
 				addComment.fulfilled,
-				(state, action: PayloadAction<Comment>) => {
-					state.comments.push(action.payload)
+				(state, action: PayloadAction<Comment | null>) => {
+					if (action.payload) {
+						state.comments.push(action.payload)
+					} else {
+						console.warn('Received null payload for addComment')
+					}
 				}
 			)
 			.addCase(
