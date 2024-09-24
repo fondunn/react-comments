@@ -1,8 +1,8 @@
 import { Comment, deleteComment } from '@/features/comments/commentsSlice'
 import { useTypedDispatch } from '@/hooks/useTypedDispatch'
+import styles from '@/styles/comment.module.scss'
 import { Delete } from '@mui/icons-material'
 import { Box, IconButton, Typography } from '@mui/material'
-
 interface Props {
 	comment: Comment
 }
@@ -36,12 +36,7 @@ const CommentItem = ({ comment }: Props) => {
 					}}
 				>
 					{comment.user.fullName}
-					<Typography
-						variant='body2'
-						sx={{ lineHeight: 'inherit%', fontWeight: '300', color: '#be123c' }}
-					>
-						({comment.user.username})
-					</Typography>
+					<span className={styles.username}>({comment.user.username})</span>
 				</Typography>
 				<Typography variant='body1'>"{`${comment.body}`}"</Typography>
 			</Box>
