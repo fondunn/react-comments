@@ -25,8 +25,25 @@ const CommentItem = ({ comment }: Props) => {
 			}}
 		>
 			<Box sx={{ width: '100%' }}>
-				<Typography variant='body1'>{comment.user.fullName}</Typography>
-				<Typography variant='body1'>{`${comment.body} (Likes: ${comment.likes})`}</Typography>
+				<Typography
+					variant='body1'
+					sx={{
+						display: 'inline-flex',
+						gap: 1,
+						alignItems: 'flex-end',
+						lineHeight: '1.2',
+						mb: '0.5rem',
+					}}
+				>
+					{comment.user.fullName}
+					<Typography
+						variant='body2'
+						sx={{ lineHeight: 'inherit%', fontWeight: '300', color: '#be123c' }}
+					>
+						({comment.user.username})
+					</Typography>
+				</Typography>
+				<Typography variant='body1'>"{`${comment.body}`}"</Typography>
 			</Box>
 
 			<IconButton aria-label='delete' onClick={() => handleDelete(comment.id)}>
