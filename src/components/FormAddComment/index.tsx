@@ -3,7 +3,11 @@ import { Button, DialogActions, TextField } from '@mui/material'
 import { SubmitHandler } from 'react-hook-form'
 
 interface FormAddCommentProps {
-	onSubmit: SubmitHandler<{ comment: string }>
+	onSubmit: SubmitHandler<{
+		comment: string
+		username: string
+		fullName: string
+	}>
 	onClose: () => void
 }
 
