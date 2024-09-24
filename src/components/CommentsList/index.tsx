@@ -13,7 +13,7 @@ import Loading from './loading'
 
 const CommentsList: React.FC = () => {
 	const { typedDispatch } = useTypedDispatch()
-	const { comments, status, error } = useSelector(selectComments)
+	const { comments, status } = useSelector(selectComments)
 	const { restoreScrollPosition } = useScrollRestoration()
 	useEffect(() => {
 		typedDispatch(fetchComments())
@@ -25,28 +25,29 @@ const CommentsList: React.FC = () => {
 		}
 	}, [status])
 
-	if (status === 'loading') {
-		return <Loading />
+	switch (status) {
+		case 'loading':
+			return <Loading />
+		case 'failed':
+			return <Failed />
+		case 'succeeded':
+			return (
+				<Container
+					sx={{
+						display: 'flex',
+						flexDirection: 'column',
+						gap: '1rem',
+						flex: 1,
+					}}
+				>
+					{comments.map(comment => (
+						<CommentItem comment={comment} key={comment.id} />
+					))}
+				</Container>
+			)
+		default:
+			return null
 	}
-
-	if (status === 'failed' || error) {
-		return <Failed />
-	}
-
-	return (
-		<Container
-			sx={{
-				display: 'flex',
-				flexDirection: 'column',
-				gap: '1rem',
-				flex: 1,
-			}}
-		>
-			{comments.map(comment => (
-				<CommentItem comment={comment} key={comment.id} />
-			))}
-		</Container>
-	)
 }
 
 export default CommentsList
