@@ -39,6 +39,7 @@ const CommentsList: React.FC = () => {
 				display: 'flex',
 				flexDirection: 'column',
 				gap: '1rem',
+				flex: 1,
 			}}
 		>
 			{comments.map(comment => (
