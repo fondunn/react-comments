@@ -18,15 +18,19 @@ export const useAddButton = () => {
 	const postId = getNumberId()
 	const userId = getNumberId()
 
-	const handleAddComment = (data: { comment: string }) => {
+	const handleAddComment = (data: {
+		comment: string
+		fullName: string
+		username: string
+	}) => {
 		const newComment: Comment = {
 			id: commentId,
 			body: data.comment,
 			postId: postId,
 			user: {
 				id: userId,
-				fullName: 'Emma Miller',
-				username: 'emmaj',
+				fullName: data.fullName,
+				username: data.username,
 			},
 			likes: 0,
 		}

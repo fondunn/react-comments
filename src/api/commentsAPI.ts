@@ -28,13 +28,13 @@ const getComments = async (): Promise<Comment[]> => {
 const addComment = async (newComment: Comment): Promise<Comment | null> => {
 	try {
 		const createdComment = await postCommentToServer(newComment)
-		createdComment.id = getNumberId()
-		createdComment.likes = 0
+
+		const updatedComment = applyFakeUser({ createdComment, newComment })
 
 		const localComments = await getLocalComments()
-		setItem(LOCAL_COMMENTS, JSON.stringify([...localComments, createdComment]))
+		setItem(LOCAL_COMMENTS, JSON.stringify([...localComments, updatedComment]))
 
-		return createdComment
+		return updatedComment
 	} catch (error) {
 		console.error('Error adding comment:', error)
 		return null
@@ -87,6 +87,25 @@ const deleteCommentFromServer = async (id: number): Promise<void> => {
 	const response = await fetch(`${BASE_URL}/${id}`, { method: 'DELETE' })
 	if (!response.ok) {
 		throw new Error('Failed to delete comment from the server')
+	}
+}
+
+const applyFakeUser = ({
+	createdComment,
+	newComment,
+}: {
+	createdComment: Comment
+	newComment: Comment
+}) => {
+	return {
+		...createdComment,
+		user: {
+			...createdComment.user,
+			username: newComment.user.username,
+			fullName: newComment.user.fullName,
+		},
+		id: getNumberId(),
+		likes: 0,
 	}
 }
 
