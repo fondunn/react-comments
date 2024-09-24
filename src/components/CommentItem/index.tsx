@@ -1,18 +1,17 @@
-import { AppDispatch } from '@/app/store'
 import { Comment, deleteComment } from '@/features/comments/commentsSlice'
+import { useTypedDispatch } from '@/hooks/useTypedDispatch'
 import { Delete } from '@mui/icons-material'
 import { Box, IconButton, Typography } from '@mui/material'
-import { useDispatch } from 'react-redux'
 
 interface Props {
 	comment: Comment
 }
 
 const CommentItem = ({ comment }: Props) => {
-	const dispatch: AppDispatch = useDispatch()
+	const { typedDispatch } = useTypedDispatch()
 
 	const handleDelete = (id: number) => {
-		dispatch(deleteComment(id))
+		typedDispatch(deleteComment(id))
 	}
 	return (
 		<Box

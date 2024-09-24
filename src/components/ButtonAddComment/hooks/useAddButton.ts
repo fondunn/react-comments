@@ -1,11 +1,10 @@
-import { AppDispatch } from '@/app/store'
 import { addComment, Comment } from '@/features/comments/commentsSlice'
+import { useTypedDispatch } from '@/hooks/useTypedDispatch'
 import { getNumberId } from '@/utils/getNumberId'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 
 export const useAddButton = () => {
-	const dispatch: AppDispatch = useDispatch()
+	const { typedDispatch } = useTypedDispatch()
 	const [isDialogOpen, setOpen] = useState(false)
 
 	const handleClickOpen = () => {
@@ -31,7 +30,7 @@ export const useAddButton = () => {
 			},
 			likes: 0,
 		}
-		dispatch(addComment(newComment))
+		typedDispatch(addComment(newComment))
 		handleClose()
 	}
 
